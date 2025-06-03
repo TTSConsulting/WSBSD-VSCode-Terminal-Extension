@@ -12,12 +12,17 @@ function getExeFilesRecursively(dir) {
         const itemPath = path.join(dir, item.name);
         if (item.isDirectory()) {
             exeFiles = exeFiles.concat(getExeFilesRecursively(itemPath)); // Dive deeper
-        } else if (item.name.startsWith("WSBSD") && item.name.endsWith(".exe")) { // More flexible match
-            exeFiles.push({
-                name: item.name.replace(".exe", ""),
-                shellPath: itemPath,
-                iconPath: new vscode.ThemeIcon("terminal")
-            });
+        } else {
+            // Debug: log all files found
+            console.log('Found file:', itemPath);
+            const lowerName = item.name.toLowerCase();
+            if (lowerName.startsWith("wsbsd") && lowerName.endsWith(".exe")) {
+                exeFiles.push({
+                    name: item.name.replace(/\.exe$/i, ""),
+                    shellPath: itemPath,
+                    iconPath: new vscode.ThemeIcon("terminal")
+                });
+            }
         }
     });
 
@@ -35,9 +40,10 @@ function activate(context) {
 
     // Step 2: Scan ALL sub-folders for BSD distros
     let distros = getExeFilesRecursively(wsbsdPath);
-
+    // Debug: log all detected distros
+    console.log('Detected WSBSD distros:', distros);
     if (distros.length === 0) {
-        vscode.window.showErrorMessage("No WSBSD distros found in C:/WSBSD or its sub-folders!");
+        vscode.window.showErrorMessage("No WSBSD distros found in C:/WSBSD or its sub-folders!\nCheck the file names and ensure they start with 'WSBSD' and end with '.exe'.");
         return;
     }
 
