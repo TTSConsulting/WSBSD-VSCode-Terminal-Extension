@@ -44,14 +44,14 @@
       }
     ]
   },
+  "repository": {
+          "url": "https://github.com/TTSConsulting/WSBSD-VSCode-Terminal-Extension"
+      },
+      "icon": "./download (1) - Copy.png",
   "main": "./src/extension.js",
   "scripts": {
     "prepublish": "vsce package"
   },
-  "repository": {
-          "url": "https://github.com/TTSConsulting/WSBSD-VSCode-Terminal-Extension"
-      },
-      "icon": "https://github.com/TTSConsulting/WSBSD/blob/main/download%20(1)%20-%20Copy.png",
   "devDependencies": {
     "vscode": "^1.85.0"
   },
