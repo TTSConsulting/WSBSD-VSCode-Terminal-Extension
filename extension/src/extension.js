@@ -2,9 +2,26 @@ const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
 
-function activate(context) {
-    const wsbsdPath = "C:/WSBSD";
+const wsbsdPath = "C:/WSBSD";
 
+function getExeFiles(dir) {
+    let exeFiles = [];
+    const items = fs.readdirSync(dir, { withFileTypes: true });
+
+    items.forEach(item => {
+        const itemPath = path.join(dir, item.name);
+        
+        if (item.isDirectory()) {
+            exeFiles = exeFiles.concat(getExeFiles(itemPath)); // Recursively search sub-folders
+        } else if (item.name.startsWith("WSBSD") && item.name.endsWith(".exe")) {
+            exeFiles.push(itemPath);
+        }
+    });
+
+    return exeFiles;
+}
+
+function activate(context) {
     // Step 1: Check if WSBSD folder exists
     if (!fs.existsSync(wsbsdPath)) {
         vscode.window.showErrorMessage(
@@ -13,37 +30,34 @@ function activate(context) {
         return;
     }
 
-    // Step 2: Scan for BSD Distros
-    let distros = [];
-    const files = fs.readdirSync(wsbsdPath);
+    // Step 2: Scan recursively for BSD distros
+    let distros = getExeFiles(wsbsdPath);
 
-    files.forEach(file => {
-        if (file.startsWith("WSBSD") && file.endsWith(".exe")) {
-            distros.push({
-                name: file.replace(".exe", ""),
-                shellPath: path.join(wsbsdPath, file),
-                iconPath: new vscode.ThemeIcon("terminal")
-            });
-        }
-    });
+    if (distros.length === 0) {
+        vscode.window.showErrorMessage("No WSBSD distros found in C:/WSBSD or its sub-folders!");
+        return;
+    }
 
     // Step 3: Register Terminal Profiles
-    distros.forEach(distro => {
+    distros.forEach(distroPath => {
+        const distroName = path.basename(distroPath, ".exe");
+        const profile = {
+            name: distroName,
+            shellPath: distroPath,
+            iconPath: new vscode.ThemeIcon("terminal")
+        };
+
         context.subscriptions.push(
-            vscode.window.registerTerminalProfileProvider(distro.name, {
-                provideTerminalProfile: () => distro
+            vscode.window.registerTerminalProfileProvider(distroName, {
+                provideTerminalProfile: () => profile
             })
         );
     });
 
     // Step 4: Command to Open First Detected BSD Terminal
     let disposable = vscode.commands.registerCommand("wsbsd.open", () => {
-        if (distros.length === 0) {
-            vscode.window.showErrorMessage("No BSD distros found in C:/WSBSD!");
-            return;
-        }
-        const terminal = vscode.window.createTerminal(distros[0].name);
-        terminal.sendText(`"${distros[0].shellPath}"`);
+        const terminal = vscode.window.createTerminal(path.basename(distros[0], ".exe"));
+        terminal.sendText(`"${distros[0]}"`);
         terminal.show();
     });
 
