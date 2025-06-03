@@ -35,6 +35,8 @@
             "title": "Open a BSD Terminal",
             "description": "Run the **WSBSD: Open WSBSD Terminal** command from the Command Palette.",
             "media": {
+              "image": "https://github.com/TTSConsulting/WSBSD/blob/main/download%20(1)%20-%20Copy.png",
+              "altText": "WSBSD Logo",
               "icon": "terminal"
             },
             "when": "true"
