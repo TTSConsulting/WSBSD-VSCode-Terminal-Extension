@@ -10,10 +10,9 @@ function getExeFilesRecursively(dir) {
 
     items.forEach(item => {
         const itemPath = path.join(dir, item.name);
-        
         if (item.isDirectory()) {
             exeFiles = exeFiles.concat(getExeFilesRecursively(itemPath)); // Dive deeper
-        } else if (item.name.startsWith("WSBSD ") && item.name.endsWith(".exe")) {
+        } else if (item.name.startsWith("WSBSD") && item.name.endsWith(".exe")) { // More flexible match
             exeFiles.push({
                 name: item.name.replace(".exe", ""),
                 shellPath: itemPath,
