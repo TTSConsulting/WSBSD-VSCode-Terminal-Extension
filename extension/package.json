@@ -1,0 +1,30 @@
+{
+  "name": "wsbsd-terminal",
+  "displayName": "WSBSD Terminal",
+  "description": "Adds WSBSD terminal support to VS Code.",
+  "version": "1.0.0",
+  "publisher": "The",
+  "engines": {
+    "vscode": ">=1.85.0"
+  },
+  "categories": ["Other"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "wsbsd.open",
+        "title": "Open WSBSD Terminal"
+      }
+    ]
+  },
+  "main": "./src/extension.js",
+  "scripts": {
+    "prepublish": "vsce package"
+  },
+  "devDependencies": {
+    "vscode": "^1.85.0"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:wsbsd.open"
+  ]
+}

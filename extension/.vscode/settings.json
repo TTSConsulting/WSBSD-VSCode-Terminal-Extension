@@ -1,0 +1,24 @@
+{
+    "terminal.integrated.profiles.windows": {
+  "WSBSD Terminal (FreeBSD Default (14.2))": {
+    "path": "C:\\Users\\tadeo\\OneDrive\\Documents\\GitHub\\WSBSD\\WSBSD\\BSDDISTROS\\FreeBSD\\root\\WSBSD FreeBSD Default (14.2)\\WSBSD FreeBSD Default (14.2)\\bin\\Debug\\WSBSD FreeBSD Default (14.2).exe",
+    "args": [],
+    "icon": "terminal"
+  },
+  "WSBSD Terminal (NetBSD 10.1)": {
+    "path": "C:\\Users\\tadeo\\OneDrive\\Documents\\GitHub\\WSBSD\\WSBSD\\BSDDISTROS\\NetBSD\\10.1\\root\\WSBSD NetBSd 10.1\\WSBSD NetBSd 10.1\\bin\\Debug\\WSBSD NetBSD 10.1.exe",
+    "args": [],
+    "icon": "terminal"
+  },
+  "WSBSD Terminal (OpenBSD 7.7)": {
+    "path": "C:\\Users\\tadeo\\OneDrive\\Documents\\GitHub\\WSBSD\\WSBSD\\BSDDISTROS\\OpenBSD\\7.7\\root\\WSBSD OpenBSD 7.7\\WSBSD OpenBSD 7.7\\bin\\Debug\\WSBSD OpenBSD 7.7.exe",
+    "args": [],
+    "icon": "terminal"
+  },
+  "WSBSD Terminal (Dragonfly BSD 6.4.2)": {
+    "path": "C:\\Users\\tadeo\\OneDrive\\Documents\\GitHub\\WSBSD\\WSBSD\\BSDDISTROS\\DragonFly\\6.4.2\\root\\WSBSD DragonBSD 6.4.2\\WSBSD DragonBSD 6.4.2\\bin\\Debug\\WSBSD DragonBSD 6.4.2.exe",
+    "args": [],
+    "icon": "terminal"
+  }
+}
+}
