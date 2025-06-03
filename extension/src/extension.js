@@ -2,11 +2,18 @@ const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
 
-const wsbsdPath = "C:/WSBSD";
+const wsbsdPath = path.resolve("C:\\WSBSD");
 
 function getExeFilesRecursively(dir) {
     let exeFiles = [];
-    const items = fs.readdirSync(dir, { withFileTypes: true });
+    console.log('Scanning directory:', dir);
+    let items = [];
+    try {
+        items = fs.readdirSync(dir, { withFileTypes: true });
+    } catch (err) {
+        console.error('Error reading directory:', dir, err);
+        return exeFiles;
+    }
 
     items.forEach(item => {
         const itemPath = path.join(dir, item.name);
@@ -16,7 +23,7 @@ function getExeFilesRecursively(dir) {
             // Debug: log all files found
             console.log('Found file:', itemPath);
             const lowerName = item.name.toLowerCase();
-            if (lowerName.startsWith("wsbsd") && lowerName.endsWith(".exe")) {
+            if (upperName.startsWith("WSBSD ") && lowerName.endsWith(".exe")) {
                 exeFiles.push({
                     name: item.name.replace(/\.exe$/i, ""),
                     shellPath: itemPath,
@@ -39,11 +46,12 @@ function activate(context) {
     }
 
     // Step 2: Scan ALL sub-folders for BSD distros
+    console.log('WSBSD path being scanned:', wsbsdPath);
     let distros = getExeFilesRecursively(wsbsdPath);
     // Debug: log all detected distros
     console.log('Detected WSBSD distros:', distros);
     if (distros.length === 0) {
-        vscode.window.showErrorMessage("No WSBSD distros found in C:/WSBSD or its sub-folders!\nCheck the file names and ensure they start with 'WSBSD' and end with '.exe'.");
+        vscode.window.showErrorMessage(`No WSBSD distros found in ${wsbsdPath} or its sub-folders!\nCheck the file names and ensure they start with 'WSBSD' and end with '.exe'.`);
         return;
     }
 
