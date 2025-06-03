@@ -13,7 +13,7 @@ function getExeFilesRecursively(dir) {
         
         if (item.isDirectory()) {
             exeFiles = exeFiles.concat(getExeFilesRecursively(itemPath)); // Dive deeper
-        } else if (item.name.startsWith("WSBSD") && item.name.endsWith(".exe")) {
+        } else if (item.name.startsWith("WSBSD ") && item.name.endsWith(".exe")) {
             exeFiles.push({
                 name: item.name.replace(".exe", ""),
                 shellPath: itemPath,
