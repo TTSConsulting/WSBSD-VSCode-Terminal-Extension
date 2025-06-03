@@ -3,7 +3,7 @@
   "displayName": "WSBSD Terminal",
   "description": "Adds WSBSD terminal support to VS Code.",
   "version": "1.0.0",
-  "publisher": "The",
+  "publisher": "Coolis1362",
   "engines": {
     "vscode": ">=1.85.0"
   },
@@ -12,7 +12,34 @@
     "commands": [
       {
         "command": "wsbsd.open",
-        "title": "Open WSBSD Terminal"
+        "title": "WSBSD: Open WSBSD Terminal"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "wsbsd-getting-started",
+        "title": "Getting Started with WSBSD Terminal",
+        "description": "Learn how to use the WSBSD Terminal extension.",
+        "steps": [
+          {
+            "id": "step-install",
+            "title": "Install WSBSD",
+            "description": "Download and install WSBSD from [here](https://github.com/TTSConsulting/WSBSD/releases) and place your BSD distros in `C:/WSBSD` (IF YOU DON'T HAVE WSBSD INSTALLED, PLEASE FOLLOW THE INSTRUCTIONS IN THIS STEP).",
+            "media": {
+              "image": "https://github.com/TTSConsulting/WSBSD/blob/main/download%20(1)%20-%20Copy.png",
+              "altText": "WSBSD Logo"
+            }
+          },
+          {
+            "id": "step-open-terminal",
+            "title": "Open a BSD Terminal",
+            "description": "Run the **WSBSD: Open WSBSD Terminal** command from the Command Palette.",
+            "media": {
+              "icon": "terminal"
+            },
+            "when": "true"
+          }
+        ]
       }
     ]
   },
