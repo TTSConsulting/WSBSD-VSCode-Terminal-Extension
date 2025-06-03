@@ -23,7 +23,7 @@ function getExeFilesRecursively(dir) {
             // Debug: log all files found
             console.log('Found file:', itemPath);
             const lowerName = item.name.toLowerCase();
-            if (upperName.startsWith("WSBSD ") && lowerName.endsWith(".exe")) {
+            if (lowerName.startsWith("wsbsd") && lowerName.endsWith(".exe")) {
                 exeFiles.push({
                     name: item.name.replace(/\.exe$/i, ""),
                     shellPath: itemPath,
