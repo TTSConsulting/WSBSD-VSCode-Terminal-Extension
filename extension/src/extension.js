@@ -76,6 +76,21 @@ function activate(context) {
     });
 
     context.subscriptions.push(disposable);
+
+    // ✅ Step 4: **Register WSBSD in the Terminal Profile Menu**
+    const terminalProfileProvider = {
+        provideTerminalProfile: () => ({
+            name: "WSBSD Terminal",
+            shellPath: distros[0].shellPath, // First detected BSD distro
+            iconPath: new vscode.ThemeIcon("terminal")
+        })
+    };
+
+    context.subscriptions.push(
+        vscode.window.registerTerminalProfileProvider("WSBSD Terminal", terminalProfileProvider)
+    );
+
+    console.log("WSBSD Terminal successfully added to the profile menu!");
 }
 
 function deactivate() {}
