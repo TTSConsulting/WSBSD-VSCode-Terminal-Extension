@@ -38,6 +38,8 @@ function getExeFilesRecursively(dir) {
 
 function activate(context) {
     // Step 1: Check if WSBSD folder exists
+    console.log("Activating WSBSD extension...");
+    console.log("Starting WSBSD VS Code Terminal extension...");
     if (!fs.existsSync(wsbsdPath)) {
         vscode.window.showErrorMessage(
             "WSBSD is not installed! Download it from: https://github.com/TTSConsulting/WSBSD/releases"
