@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
+const exec = require("child_process").exec;
 
 const wsbsdPath = path.resolve("C:\\WSBSD");
 
@@ -20,7 +21,6 @@ function getExeFilesRecursively(dir) {
         if (item.isDirectory()) {
             exeFiles = exeFiles.concat(getExeFilesRecursively(itemPath)); // Dive deeper
         } else {
-            // Debug: log all files found
             console.log('Found file:', itemPath);
             const lowerName = item.name.toLowerCase();
             if (lowerName.startsWith("wsbsd") && lowerName.endsWith(".exe")) {
@@ -45,17 +45,16 @@ function activate(context) {
         return;
     }
 
-    // Step 2: Scan ALL sub-folders for BSD distros
     console.log('WSBSD path being scanned:', wsbsdPath);
     let distros = getExeFilesRecursively(wsbsdPath);
-    // Debug: log all detected distros
     console.log('Detected WSBSD distros:', distros);
+
     if (distros.length === 0) {
         vscode.window.showErrorMessage(`No WSBSD distros found in ${wsbsdPath} or its sub-folders!\nCheck the file names and ensure they start with 'WSBSD' and end with '.exe'.`);
         return;
     }
 
-    // Step 3: Register Terminal Profiles
+    // Step 2: Register Terminal Profiles
     distros.forEach(distro => {
         context.subscriptions.push(
             vscode.window.registerTerminalProfileProvider(distro.name, {
@@ -64,8 +63,13 @@ function activate(context) {
         );
     });
 
-    // Step 4: Command to Open First Detected BSD Terminal
+    // Step 3: Validate Existence Before Execution
     let disposable = vscode.commands.registerCommand("wsbsd.open", () => {
+        if (!fs.existsSync(distros[0].shellPath)) {
+            vscode.window.showErrorMessage("WSBSD DragonBSD executable not found! Verify your installation.");
+            return;
+        }
+
         const terminal = vscode.window.createTerminal(distros[0].name);
         terminal.sendText(`"${distros[0].shellPath}"`);
         terminal.show();
