@@ -26,7 +26,7 @@
             "title": "Install WSBSD",
             "description": "Download and install WSBSD from [here](https://github.com/TTSConsulting/WSBSD/releases) and place your BSD distros in `C:/WSBSD` (IF YOU DON'T HAVE WSBSD INSTALLED, PLEASE FOLLOW THE INSTRUCTIONS IN THIS STEP).",
             "media": {
-              "image": "./download (1) - Copy.png",
+              "image": "./download(1)-Copy.png",
               "altText": "WSBSD Logo"
             }
           },
@@ -36,7 +36,7 @@
             "description": "Run the **WSBSD: Open WSBSD Terminal** command from the Command Palette, To Run Go to the bar in the top of VS Code, and Type in '>WSBSD: Open WSBSD Terminal' and press Enter.",
             "when": "true",
             "media": {
-              "image": "./download (1) - Copy.png",
+              "image": "./download(1)-Copy.png",
               "altText": "WSBSD Logo"
             }
           }
@@ -47,7 +47,7 @@
   "repository": {
           "url": "https://github.com/TTSConsulting/WSBSD-VSCode-Terminal-Extension"
       },
-      "icon": "./download (1) - Copy.png",
+      "icon": "./download(1)-Copy.png",
   "main": "./src/extension.js",
   "scripts": {
     "prepublish": "vsce package"
