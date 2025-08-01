@@ -2,7 +2,7 @@
   "name": "wsbsd-terminal",
   "displayName": "WSBSD Terminal",
   "description": "Adds WSBSD terminal support to VS Code.",
-  "version": "1.0.0",
+  "version": "1.0.0.1",
   "publisher": "Coolis1362",
   "engines": {
     "vscode": ">=1.85.0"
